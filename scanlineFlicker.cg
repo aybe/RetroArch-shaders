@@ -1,0 +1,83 @@
+/*
+
+This shader does flickering scanlines like in a CRT.
+
+by Aybe, 2014
+
+Tweaking instructions
+
+Example environment:
+- Marvel Super Heroes VS Street Fighter (384*224)
+- 1920*1200 screen
+- Video Options -> Integer Scale = ON
+
+Default settings of 1 for 'scanlineHeight' and 'scale_x/yN' values in the CGP
+produces a scanline that is exactly 1 pixel high according the game resolution.
+
+If for instance you would like scanlines exactly 2 (screen) pixels high
+while at fullscreen :
+- set 'scanlineHeight' to 2
+- set Shader Options -> Shader Scale = 5x
+- apply shader changes
+
+Presets for different resolutions are to follow ...
+
+*/
+
+static const float scanlineHeight    = 1.0; // scanline height, pixels
+static const float scanlineSpeed     = 4.0; // flicker speed, 4.0 = 30 FPS
+static const float scanlineSpeedHalf = 2.0; // must be half of 'scanlineSpeed'
+static const float scanlineDim       = 0.5; // dimming of scanline
+
+void main_vertex
+(
+	float4 position	: POSITION,
+	float4 color	: COLOR,
+	float2 texCoord : TEXCOORD0,
+
+    uniform float4x4 modelViewProj,
+
+	out float4 oPosition : POSITION,
+	out float4 oColor    : COLOR,
+	out float2 otexCoord : TEXCOORD
+)
+{
+	oPosition = mul(modelViewProj, position);
+	oColor = color;
+	otexCoord = texCoord;
+}
+
+struct input
+{
+  float2 video_size;
+  float2 texture_size;
+  float2 output_size;
+  float  frame_count;
+  float  frame_direction;
+  float  frame_rotation;
+};
+
+struct output 
+{
+  float4 color    : COLOR;
+};
+
+output main_fragment(float2 texCoord : TEXCOORD0, uniform sampler2D decal : TEXUNIT0, uniform input IN) 
+{
+	float4 pixel = tex2D(decal, texCoord);
+	float2 scale = IN.output_size / IN.video_size;
+	float odd = fmod(texCoord.y * IN.texture_size.y * (scale.y / scanlineHeight), 2.0);
+	float fc  = fmod(IN.frame_count, scanlineSpeed);
+	
+	if (odd < 1.0) {
+		if (fc >= scanlineSpeedHalf) pixel.xyz *= scanlineDim;
+	}
+	else {
+		if(fc < scanlineSpeedHalf) pixel.xyz *= scanlineDim;
+	}
+
+	output OUT;
+	OUT.color = pixel;
+	return OUT;
+}
+
