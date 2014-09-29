@@ -34,6 +34,7 @@ This shader does flickering scanlines like in a CRT.
 By default a scanline height equals the height of one scanline at the game resolution level, if you'd like to have screen-level scanline heights, refer to the documentation inside it.
 
 ![](https://raw.githubusercontent.com/aybe/RetroArch-shaders/master/samples/scanlineFlicker.gif)
+
 (view the image at 1:1 scale otherwise it'll look bad, for instance in Chrome right-click it and select 'Open image in new tab')
 
 Notes
