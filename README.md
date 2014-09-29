@@ -19,9 +19,13 @@ It gives that printed-on-paper look'n'feel, barely noticeable on some games on s
 
 Note: your GPU must handle 4096*4096 textures !
 
+![](https://raw.githubusercontent.com/aybe/RetroArch-shaders/master/samples/cmyk.png)
+
 **nop.cgp**
 
 No-operation shader, just passes content as it is.
+
+![](https://raw.githubusercontent.com/aybe/RetroArch-shaders/master/samples/nop.png)
 
 **scanlineFlicker.cgp**
 
@@ -29,6 +33,7 @@ This shader does flickering scanlines like in a CRT.
 
 By default a scanline height equals the height of one scanline at the game resolution level, if you'd like to have screen-level scanline heights, refer to the documentation inside it.
 
+![](https://raw.githubusercontent.com/aybe/RetroArch-shaders/master/samples/scanlineFlicker.gif)
 
 Notes
 -----
