@@ -35,7 +35,7 @@ By default a scanline height equals the height of one scanline at the game resol
 
 ![](https://raw.githubusercontent.com/aybe/RetroArch-shaders/master/samples/scanlineFlicker.gif)
 
-(view the image at 1:1 scale otherwise it'll look bad, for instance in Chrome right-click it and select 'Open image in new tab')
+(click the image to view it at 1:1 scale)
 
 Notes
 -----
