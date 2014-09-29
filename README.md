@@ -6,7 +6,7 @@ Some shaders for RetroArch
 Installation
 ------------
 
-Copy them to the `shaders` directory of your RetroArch installation.
+Copy the content of the `shaders` directory to the `shaders` (or any sub-folder) directory of your RetroArch installation.
 
 Description
 ------------
