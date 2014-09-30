@@ -1,0 +1,36 @@
+/*
+
+from http://en.wikipedia.org/wiki/YUV
+
+HDTV
+
+by Aybe, 2014
+
+*/
+
+void main_vertex
+(
+   float4 position : POSITION,
+   out float4 oPosition : POSITION,
+   uniform float4x4 modelViewProj,
+   float2 tex : TEXCOORD,
+   out float2 oTex : TEXCOORD
+)
+{
+   oPosition = mul(modelViewProj, position);
+   oTex = tex;
+}
+
+float4 main_fragment (
+	float2 tex : TEXCOORD,
+	uniform sampler2D s0 : TEXUNIT0
+	) : COLOR
+{
+	float4 c = tex2D(s0, tex);
+	float r = c.x;
+	float g = c.y;
+	float b = c.z;
+	float a = c.w;
+	float w = r * 0.2125 + g * 0.7154 + b * 0.0721;
+	return float4(w, w, w, a);
+}
