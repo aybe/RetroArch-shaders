@@ -1,0 +1,45 @@
+/*
+
+from http://001.vade.info/
+
+by Aybe, 2014
+
+*/
+
+void main_vertex
+(
+   float4 position : POSITION,
+   out float4 oPosition : POSITION,
+   uniform float4x4 modelViewProj,
+   float2 tex : TEXCOORD,
+   out float2 oTex : TEXCOORD
+)
+{
+   oPosition = mul(modelViewProj, position);
+   oTex = tex;
+}
+
+static const float amount = 0.5;
+
+float4 main_fragment (
+	float2 tex : TEXCOORD,
+	uniform sampler2D s0 : TEXUNIT0
+	) : COLOR
+{
+	float4 input0 = tex2D(s0, tex);
+	
+	float3 redmatte   = float3(input0.r - ((input0.g + input0.b) / 2.0));
+	float3 greenmatte = float3(input0.g - ((input0.r + input0.b) / 2.0));
+	float3 bluematte  = float3(input0.b - ((input0.r + input0.g) / 2.0));
+	
+	redmatte   = 1.0 - redmatte;
+	greenmatte = 1.0 - greenmatte;
+	bluematte  = 1.0 - bluematte;
+	
+	float3 red   = greenmatte * bluematte  * input0.r;
+	float3 green = redmatte   * bluematte  * input0.g; 
+	float3 blue  = redmatte   * greenmatte * input0.b;
+	
+	float4 result = float4(red.r, green.g, blue.b, input0.a);
+	return mix(input0, result, amount);
+}

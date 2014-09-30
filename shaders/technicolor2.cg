@@ -1,0 +1,49 @@
+/*
+
+from http://001.vade.info/
+
+by Aybe, 2014
+
+*/
+
+void main_vertex
+(
+   float4 position : POSITION,
+   out float4 oPosition : POSITION,
+   uniform float4x4 modelViewProj,
+   float2 tex : TEXCOORD,
+   out float2 oTex : TEXCOORD
+)
+{
+   oPosition = mul(modelViewProj, position);
+   oTex = tex;
+}
+
+static const float amount = 0.5;
+
+static const float4 redfilter       = float4(1.0, 0.0, 0.0, 1.0);
+static const float4 bluegreenfilter = float4(0.0, 1.0, 1.0, 1.0);
+
+static const float4 cyanfilter      = float4(0.0, 1.0, 0.5, 1.0);
+static const float4 magentafilter   = float4(1.0, 0.0, 0.25, 1.0);
+
+float4 main_fragment (
+	float2 tex : TEXCOORD,
+	uniform sampler2D s0 : TEXUNIT0
+	) : COLOR
+{
+	float4 input0 = tex2D(s0, tex);
+	
+	float4 redrecord       = input0 * redfilter;
+	float4 bluegreenrecord = input0 * bluegreenfilter;
+	
+	float4 rednegative = float4(redrecord.r);
+	float4 bluegreennegative = float4((bluegreenrecord.g + bluegreenrecord.b) / 2.0);
+	
+	float4 redoutput = rednegative + cyanfilter;
+	float4 bluegreenoutput = bluegreennegative + magentafilter;
+	
+	float4 result = redoutput * bluegreenoutput;
+	
+	return float4(lerp(input0, result, amount).rgb, 1.0);
+}

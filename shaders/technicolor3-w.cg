@@ -1,0 +1,56 @@
+/*
+
+from http://001.vade.info/
+
+by Aybe, 2014
+
+*/
+
+void main_vertex
+(
+   float4 position : POSITION,
+   out float4 oPosition : POSITION,
+   uniform float4x4 modelViewProj,
+   float2 tex : TEXCOORD,
+   out float2 oTex : TEXCOORD
+)
+{
+   oPosition = mul(modelViewProj, position);
+   oTex = tex;
+}
+
+static const float amount = 0.5;
+
+static const float4 redfilter       = float4(1.0, 0.0, 0.0, 0.0);
+static const float4 greenfilter     = float4(0.0, 1.0, 0.0, 0.0);
+static const float4 bluefilter      = float4(0.0, 0.0, 1.0, 0.0);
+
+static const float4 redorangefilter = float4(0.99, 0.263, 0.0, 0.0);
+
+static const float4 cyanfilter      = float4(0.0, 1.0, 1.0, 0.0);
+static const float4 magentafilter   = float4(1.0, 0.0, 1.0, 0.0);
+static const float4 yellowfilter    = float4(1.0, 1.0, 0.0, 0.0);
+
+float4 main_fragment (
+	float2 tex : TEXCOORD,
+	uniform sampler2D s0 : TEXUNIT0
+	) : COLOR
+{
+	float4 input0 = tex2D(s0, tex);
+	
+	float4 greenrecord = input0 * greenfilter;
+	float4 bluerecord  = input0 * magentafilter;
+	float4 redrecord   = input0 * redorangefilter;
+	
+	float4 rednegative   = float4((redrecord.r   + redrecord.g   + redrecord.b  ) / 3.0);
+	float4 greennegative = float4((greenrecord.r + greenrecord.g + greenrecord.b) / 3.0);
+	float4 bluenegative  = float4((bluerecord.r  + bluerecord.g  + bluerecord.b ) / 3.0);
+	
+	float4 redoutput   = rednegative + cyanfilter;
+	float4 greenoutput = greennegative + magentafilter;
+	float4 blueoutput  =  bluenegative + yellowfilter;
+	
+	float4 result = redoutput * greenoutput * blueoutput;
+	
+	return mix(input0, result, amount);
+}
