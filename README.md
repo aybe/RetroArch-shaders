@@ -37,6 +37,78 @@ By default a scanline height equals the height of one scanline at the game resol
 
 (click the image to view it at 1:1 scale)
 
+
+**grayAverage.cgp**
+
+This gray shader uses the poor man's gray algorithm, channels are added and divided by 3.
+
+![](https://raw.githubusercontent.com/aybe/RetroArch-shaders/master/samples/grayAverage.png)
+
+**grayBT601.cgp**
+
+This gray shader uses the same transformation matrix used in SDTV.
+
+![](https://raw.githubusercontent.com/aybe/RetroArch-shaders/master/samples/grayBT601.png)
+
+**grayBT709.cgp**
+
+This gray shader uses the same transformation matrix used in HDTV.
+
+![](https://raw.githubusercontent.com/aybe/RetroArch-shaders/master/samples/grayBT709.png)
+
+**grayBT709Negative.cgp**
+
+Same as *grayBT709* except that black is white and vice-versa, like the alien vision in AvP.
+
+![](https://raw.githubusercontent.com/aybe/RetroArch-shaders/master/samples/grayBT709Negative.png)
+
+**technicolor1.cgp**
+
+Technicolor shader, a color process used in early film shootings which consisted of filming using multiples films and merging them to color the motion.
+
+See http://en.wikipedia.org/wiki/Technicolor for more.
+
+This version uses an additive blend of red and blue channels.
+
+![](https://raw.githubusercontent.com/aybe/RetroArch-shaders/master/samples/technicolor1.png)
+
+**technicolor2.cgp**
+
+Technicolor shader, this version uses a multiplicative blend of red and blue channels.
+
+![](https://raw.githubusercontent.com/aybe/RetroArch-shaders/master/samples/technicolor2.png)
+
+**technicolor3.cgp**
+
+Technicolor shader, this version does matting between all channels.
+
+![](https://raw.githubusercontent.com/aybe/RetroArch-shaders/master/samples/technicolor3.png)
+
+**technicolor3-w.cgp**
+
+Technicolor shader, this version uses cyan, magenta, yellow and red/orange filters.
+
+![](https://raw.githubusercontent.com/aybe/RetroArch-shaders/master/samples/technicolor3-w.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Notes
 -----
 
