@@ -98,4 +98,4 @@ If you'd like to tweak the shaders, you will find explanations of variables of i
 Credits
 -------
 
-Technicolor shaders : ![](http://001.vade.info/)
+Technicolor shaders : http://001.vade.info/
