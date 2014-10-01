@@ -8,6 +8,7 @@ Installation
 
 Copy the content of the `shaders` directory to the `shaders` (or any sub-folder) directory of your RetroArch installation.
 
+
 Description
 ------------
 
@@ -36,7 +37,6 @@ By default a scanline height equals the height of one scanline at the game resol
 ![](https://raw.githubusercontent.com/aybe/RetroArch-shaders/master/samples/scanlineFlicker.gif)
 
 (click the image to view it at 1:1 scale)
-
 
 **grayAverage.cgp**
 
@@ -90,26 +90,12 @@ Technicolor shader, this version uses cyan, magenta, yellow and red/orange filte
 
 ![](https://raw.githubusercontent.com/aybe/RetroArch-shaders/master/samples/technicolor3-w.png)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Notes
 -----
 
 If you'd like to tweak the shaders, you will find explanations of variables of interest in the shaders themselves.
+
+Credits
+-------
+
+Technicolor shaders : ![](http://001.vade.info/)
